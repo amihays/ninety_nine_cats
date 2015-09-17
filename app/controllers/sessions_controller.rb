@@ -13,17 +13,18 @@ class SessionsController < ApplicationController
       params[:user][:password]
       )
 
-    if @user.nil?
+    if @user
+      login_user!(@user)
+    else
       flash.now[:errors] ||= []
       flash.now[:errors] << "Must have valid username password combo!"
       render :new
-    else
-      login_user!(@user)
     end
   end
 
   def destroy
-    current_user.reset_session_token! if current_user
+    @session = Session.find_by_token(session[:session_token]) # Fix me!
+    @session.destroy! if @session
     session[:session_token] = nil
     redirect_to new_session_url
   end
