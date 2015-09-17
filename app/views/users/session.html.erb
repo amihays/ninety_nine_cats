@@ -1,0 +1,5 @@
+<h1>All Logged In Devices!</h1>
+
+<% @sessions.each do |session| %>
+  <%= session.request.env["SERVER_NAME"] %>
+<% end %>

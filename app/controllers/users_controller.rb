@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def sessions
+    @user = User.find(params[:id])
+    @sessions = @user.sessions
+    render :session
+  end
+
   private
 
   def user_params

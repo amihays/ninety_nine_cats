@@ -5,7 +5,9 @@ NinetyNineCatsDay1::Application.routes.draw do
     post "deny", on: :member
   end
 
-  resource :user, only: [:create, :new, :destroy, :edit]
+  resource :user, only: [:create, :new, :destroy, :edit] do
+    get "sessions", on: :member
+  end
   resource :session, only: [:create, :new, :destroy]
 
   root to: redirect("/cats")
